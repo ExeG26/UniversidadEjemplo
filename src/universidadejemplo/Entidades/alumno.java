@@ -1,7 +1,7 @@
+
 package universidadejemplo.Entidades;
 
 import java.time.LocalDate;
-
 
 public class alumno {
     
@@ -38,6 +38,7 @@ public class alumno {
 
     public void setIdAlumno(int idAlumno) {
         this.idAlumno = idAlumno;
+
     }
 
     public int getDni() {
@@ -63,7 +64,7 @@ public class alumno {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public LocalDate getFechaNac() {
         return fechaNac;
     }
