@@ -1,24 +1,44 @@
 
 package universidadejemplo.Entidades;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class alumno {
     
+    private int idAlumno;
     private int dni;
-    private String apellido, nombre;
-    private Date fechaNacimiento;
-    private boolean estado;
+    private String apellido;
+    private String nombre;
+    private LocalDate fechaNac;
+    private boolean activo;
 
     public alumno() {
     }
 
-    public alumno(int dni, String apellido, String nombre, Date fechaNacimiento, boolean estado) {
+    public alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
+        this.idAlumno = idAlumno;
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        this.estado = estado;
+        this.fechaNac = fechaNac;
+        this.activo = activo;
+    }
+
+    public alumno(int dni, String apellido, String nombre, LocalDate fechaNac, boolean activo) {
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fechaNac = fechaNac;
+        this.activo = activo;
+    }
+
+    public int getIdAlumno() {
+        return idAlumno;
+    }
+
+    public void setIdAlumno(int idAlumno) {
+        this.idAlumno = idAlumno;
+
     }
 
     public int getDni() {
@@ -44,24 +64,27 @@ public class alumno {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
     
-    
+    public LocalDate getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(LocalDate fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
+    }
     
     
 }
