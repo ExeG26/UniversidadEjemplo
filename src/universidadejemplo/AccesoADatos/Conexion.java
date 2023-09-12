@@ -21,7 +21,8 @@ public class Conexion {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
                 try {
-                    connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/universidadulp", "root", "");
+                    connection = DriverManager.getConnection(URL+DB,USUARIO,PASSWORD);
+                    JOptionPane.showMessageDialog(null,"Conectado");
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error en la conexion" + ex.getMessage());
                 }
