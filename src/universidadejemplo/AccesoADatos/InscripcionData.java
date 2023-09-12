@@ -6,7 +6,7 @@ public class InscripcionData {
     
     private Connection con;
     private MateriaData matData;
-    private AlumnoData aluData;
+   // private AlumnoData aluData;
 
     public InscripcionData() {
     }
