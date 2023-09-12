@@ -10,6 +10,7 @@ public class MateriaData {
     private Connection con;
 
     public MateriaData() {
+        con = Conexion.getConexion();
     }
 
     public void guardarMateria(Materia materia) {
