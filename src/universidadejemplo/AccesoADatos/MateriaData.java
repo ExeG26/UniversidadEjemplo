@@ -20,7 +20,6 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar la materia");
         }
-
     }
 
     public Materia buscarMateria(int idMateria) {
@@ -69,6 +68,5 @@ public class MateriaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al eliminar la materia" + ex.getMessage());
         }
-
     }
 }
