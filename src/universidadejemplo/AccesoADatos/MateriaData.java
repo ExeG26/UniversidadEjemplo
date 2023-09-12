@@ -14,7 +14,7 @@ public class MateriaData {
 
     public void guardarMateria(Materia materia) {
         String sql = "INSERT INTO materia(nombre, anio, estado) "
-                + "VALUES (null,'?','?','?')";
+                + "VALUES (null,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
         } catch (SQLException ex) {
@@ -45,26 +45,38 @@ public class MateriaData {
         return materia;
     }
 
-    public void modificarMateria(int idMateria) {
-        String sql = "UPDATE materia SET idMateria='?',nombre='?',anio='?',estado='?'"
-                + " WHERE 1";
+    public void modificarMateria(Materia materia) {
+        String sql = "UPDATE materia SET nombre=?,anio=?,estado=?"
+                + " WHERE idMateria=?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
+            ps.setString(1,materia.getNombre());
+            ps.setInt(2,materia.getAnio());
+            ps.setBoolean(3,materia.isEstado());
             int registro = ps.executeUpdate();
             System.out.println(registro);
+            if(registro == 1){
+                JOptionPane.showMessageDialog(null,"Materia modificada");
+            }else{
+                JOptionPane.showMessageDialog(null,"La materia no existe");
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar la materia" + ex.getMessage());
         }
     }
 
     public void eliminarMateria(int idMateria) {
-        String sql = "DELETE FROM materia WHERE idMateria = '?'";
+        String sql = "DELETE FROM materia WHERE idMateria = ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
             int registro = ps.executeUpdate();
             System.out.println(registro);
+            if(registro == 1){
+                JOptionPane.showMessageDialog(null,"Se eliminó la materia");
+            }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al eliminar la materia" + ex.getMessage());
         }
