@@ -2,8 +2,6 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Materia;
