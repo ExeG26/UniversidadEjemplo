@@ -9,7 +9,7 @@ public class InscripcionData {
     
     private Connection con = null;
     private MateriaData matData;
-    private AlumnoData aluData;
+   // private AlumnoData aluData;
 
     public InscripcionData() {
         con = Conexion.getConexion();
