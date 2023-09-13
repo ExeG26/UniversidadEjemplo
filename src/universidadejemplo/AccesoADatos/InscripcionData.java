@@ -17,7 +17,12 @@ public class InscripcionData {
     
     public void guardarInscripcion(Inscripcion insc){
         String sql = "INSERT INTO Inscripcion(alumno, materia, nota) Values (?,?,?)";
-        
+        try{
+            PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+        }catch(SQLException ex){
+            System.out.println("a");
+        }
     }
     
     public void obtenerMateriasCursadas(){

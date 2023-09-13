@@ -2,6 +2,7 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.*;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Materia;
 
@@ -15,9 +16,11 @@ public class MateriaData {
 
     public void guardarMateria(Materia materia) {
         String sql = "INSERT INTO materia(nombre, anio, estado) "
-                + "VALUES (null,?,?,?)";
+                + "VALUES (?,?,?)";
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materia.getNombre());
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar la materia");
         }
