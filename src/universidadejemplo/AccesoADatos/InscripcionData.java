@@ -25,11 +25,9 @@ public class InscripcionData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, org.mariadb.jdbc.Statement.RETURN_GENERATED_KEYS);
-
             ps.setInt(1, insc.getAlumno().getIdAlumno());
             ps.setInt(2, insc.getMateria().getIdMateria());
             ps.setDouble(3, insc.getNota());
-
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -42,8 +40,7 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al entrar a la tabla Inscripcion");
         }
-
-    }
+     }
 
     public void actualizarNota(int idalumno, int idmateria, double nota) {
 
@@ -51,7 +48,6 @@ public class InscripcionData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setDouble(1, nota);
             ps.setInt(2, idalumno);
             ps.setInt(3, idmateria);
@@ -68,7 +64,7 @@ public class InscripcionData {
         }
     }
 
-    public void deletearMateria(int idalumno, int idmateria) {
+    public void borrarMateria(int idalumno, int idmateria) {
 
         String sql = "DELETE FROM inscripcion WHERE idalumno=? and idmateria=?";
 
@@ -83,17 +79,14 @@ public class InscripcionData {
                 JOptionPane.showMessageDialog(null, "Inscripcion Borrada");
             }
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al entrar a la tabla Inscripcion");
         }
-
     }
 
     public List<Inscripcion> ObtenerInscripciones() {
 
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
-
         String sql = "SELECT * FROM inscripcion";
 
         try {
@@ -111,21 +104,17 @@ public class InscripcionData {
                 insc.setNota(rs.getDouble("nota"));
 
                 cursadas.add(insc);
-
             }
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al entrar a la tabla Inscripcion");
         }
-
         return cursadas;
     }
 
     public List<Inscripcion> ObtenerInscripcionesPorAlumno(int IdAlumno) {
 
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
-
         String sql = "SELECT * FROM inscripcion WHERE idalumno=?";
 
         try {
@@ -144,22 +133,18 @@ public class InscripcionData {
                 insc.setNota(rs.getDouble("nota"));
 
                 cursadas.add(insc);
-
             }
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al entrar a la tabla Inscripcion");
         }
-
         return cursadas;
-
     }
 
     public List<Materia> ObtenerMateriasCursadas(int IdAlumno) {
 
         ArrayList<Materia> materias = new ArrayList<>();
-
         String sql = "SELECT inscripcion.idmateria, nombre, año FROM inscripcion,"
                 + "materia WHERE inscripcion.idmateria = materia.idmateria"
                 + "AND inscripcion.idalumno = ?";
@@ -175,9 +160,7 @@ public class InscripcionData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("año"));
                 materias.add(materia);
-
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla inscripcion");
@@ -188,7 +171,6 @@ public class InscripcionData {
     public List<Materia> ObtenerMateriasNoCursadas(int IdAlumno) {
 
         ArrayList<Materia> materias = new ArrayList<>();
-
         String sql = "SELECT * FROM materia WHERE estado = 1 AND idmateria not in"
                 + "(SELECT idmateria FROM inscripcion WHERE idalumno=?)";
 
@@ -203,9 +185,7 @@ public class InscripcionData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("año"));
                 materias.add(materia);
-
             }
-
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla inscripcion");
@@ -216,7 +196,6 @@ public class InscripcionData {
     public List<Alumno> ObtenerAlumnoxMateria(int IdMateria) {
 
         ArrayList<Alumno> alumnos = new ArrayList<>();
-
         String sql = "SELECT a.idalumno, dni, nombre, apellido, fechanaciemiento, estado"
                 + "FROM inscripcion i, alumno a WHERE i.idalumno = a.idalumno AND idmateria=? AND a.estado = 1";
 
@@ -239,8 +218,6 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectar con la tabla inscripcion");
         }
-
         return alumnos;
-
     }
 }
