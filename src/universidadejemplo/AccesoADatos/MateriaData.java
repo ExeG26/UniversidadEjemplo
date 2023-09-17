@@ -2,12 +2,12 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.*;
-<<<<<<< Updated upstream
+
 import java.time.LocalDate;
-=======
+
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> Stashed changes
+
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Materia;
 
@@ -25,9 +25,7 @@ public class MateriaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, materia.getNombre());
-<<<<<<< Updated upstream
-            
-=======
+
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isEstado());
             ps.executeUpdate();
@@ -39,7 +37,7 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "Materia guardada");
             }
             ps.close();
->>>>>>> Stashed changes
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar la materia");
         }
