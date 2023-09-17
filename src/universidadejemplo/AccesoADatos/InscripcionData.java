@@ -11,30 +11,14 @@ import universidadejemplo.Entidades.Materia;
 public class InscripcionData {
 
     private Connection con = null;
-<<<<<<< Updated upstream
-    private MateriaData matData;
-    private AlumnoData aluData;
-=======
     private final MateriaData md = new MateriaData();
     private final AlumnoData ad = new AlumnoData();
->>>>>>> Stashed changes
 
     public InscripcionData() {
         con = Conexion.getConexion();
     }
-<<<<<<< Updated upstream
     
-    public void guardarInscripcion(Inscripcion insc){
-        String sql = "INSERT INTO Inscripcion(alumno, materia, nota) Values (?,?,?)";
-        try{
-            PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-        }catch(SQLException ex){
-            System.out.println("a");
-        }
-=======
-
-    public void guardarInscripcion(Inscripcion insc) {
+     public void guardarInscripcion(Inscripcion insc) {
 
         String sql = "INSERT INTO inscripcion (idalumno, idmateria, nota)"
                 + "VALUES (?,?,?)";
@@ -59,7 +43,6 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al entrar a la tabla Inscripcion");
         }
 
->>>>>>> Stashed changes
     }
 
     public void actualizarNota(int idalumno, int idmateria, double nota) {
