@@ -2,7 +2,12 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.*;
+<<<<<<< Updated upstream
 import java.time.LocalDate;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> Stashed changes
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Materia;
 
@@ -20,7 +25,21 @@ public class MateriaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, materia.getNombre());
+<<<<<<< Updated upstream
             
+=======
+            ps.setInt(2, materia.getAnio());
+            ps.setBoolean(3, materia.isEstado());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+
+                materia.setIdMateria(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Materia guardada");
+            }
+            ps.close();
+>>>>>>> Stashed changes
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al guardar la materia");
         }
@@ -71,18 +90,81 @@ public class MateriaData {
     }
 
     public void eliminarMateria(int idMateria) {
-        String sql = "DELETE FROM materia WHERE idMateria = ?";
-        PreparedStatement ps;
+        
+//        String sql = "DELETE FROM materia WHERE idMateria = ?";
+//        PreparedStatement ps;
+//        try {
+//            ps = con.prepareStatement(sql);
+//            int registro = ps.executeUpdate();
+//            System.out.println(registro);
+//            if(registro == 1){
+//                JOptionPane.showMessageDialog(null,"Se eliminó la materia");
+//            }
+//            ps.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null,"Error al eliminar la materia" + ex.getMessage());
+//        }
+         String sql = "UPDATE materia SET estado = 0 WHERE idmateria=?";
+
         try {
-            ps = con.prepareStatement(sql);
-            int registro = ps.executeUpdate();
-            System.out.println(registro);
-            if(registro == 1){
-                JOptionPane.showMessageDialog(null,"Se eliminó la materia");
+            PreparedStatement ps = con.prepareStatement(sql);
+            //ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Materia Inactiva");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+
+        }
+    }
+
+    public void reactivarMateria(int id) {
+        String sql = "UPDATE materia SET estado = 1 WHERE idmateria=?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Materia reactivada");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+
+        }
+
+}
+    
+    public List<Materia> ListarMateria() {
+
+        String sql = "SELECT  idmateria, nombre, anio FROM materia WHERE estado=1 "; 
+        ArrayList<Materia> materias = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+
+                Materia materia = new Materia();
+                materia.setIdMateria(rs.getInt("idmateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("año"));
+                materia.setEstado(true);
+                
+                materias.add(materia);
+
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al eliminar la materia" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
         }
+        return materias;
     }
 }
+
+
