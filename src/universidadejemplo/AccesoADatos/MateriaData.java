@@ -2,9 +2,6 @@
 package universidadejemplo.AccesoADatos;
 
 import java.sql.*;
-
-import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +99,7 @@ public class MateriaData {
 //        } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null,"Error al eliminar la materia" + ex.getMessage());
 //        }
-         String sql = "UPDATE materia SET estado = 0 WHERE idmateria=?";
+         String sql = "UPDATE materia SET estado = 0 WHERE idMateria=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -120,7 +117,7 @@ public class MateriaData {
     }
 
     public void reactivarMateria(int id) {
-        String sql = "UPDATE materia SET estado = 1 WHERE idmateria=?";
+        String sql = "UPDATE materia SET estado = 1 WHERE idMateria=?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -140,7 +137,7 @@ public class MateriaData {
     
     public List<Materia> ListarMateria() {
 
-        String sql = "SELECT  idmateria, nombre, anio FROM materia WHERE estado=1 "; 
+        String sql = "SELECT  idMateria, nombre, anio FROM materia WHERE estado=1 "; 
         ArrayList<Materia> materias = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -149,9 +146,9 @@ public class MateriaData {
             while(rs.next()){
 
                 Materia materia = new Materia();
-                materia.setIdMateria(rs.getInt("idmateria"));
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("año"));
+                materia.setAnio(rs.getInt("anio"));
                 materia.setEstado(true);
                 
                 materias.add(materia);
